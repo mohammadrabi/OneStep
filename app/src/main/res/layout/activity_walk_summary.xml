@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="eventHandler"
+            type="com.itg.onestep.summary.SummaryEventHandler" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/summary_ConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/courses_white"
+    android:clickable="false"
+    >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/headerContainer"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toTopOf="parent"
+           >
+           <ImageButton
+               android:id="@+id/back_arrow_button"
+               android:layout_width="38dp"
+               android:layout_height="38dp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintLeft_toLeftOf="parent"
+               android:src="@drawable/ic_back_arrow"
+               android:background="@drawable/ic_oval"
+               android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+               android:layout_marginVertical="@dimen/activity_vertical_margin"
+               android:onClick="@{() -> eventHandler.onBackButtonClicked()}"
+               tools:ignore="ContentDescription" />
+
+           <ImageButton
+               android:id="@+id/share"
+               android:layout_width="38dp"
+               android:layout_height="38dp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               android:src="@drawable/ic_share"
+               android:background="@drawable/ic_oval"
+               android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+               android:layout_marginVertical="@dimen/activity_vertical_margin"
+               android:onClick="@{() -> eventHandler.onShareButtonClicked()}"
+               tools:ignore="ContentDescription"
+               android:visibility="invisible"
+               android:clickable="false"/>
+
+
+
+           <TextView
+               android:id="@+id/title"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:layout_constraintLeft_toRightOf="@id/back_arrow_button"
+               app:layout_constraintRight_toLeftOf="@id/share"
+               android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+               app:layout_constraintTop_toTopOf="@id/back_arrow_button"
+               app:layout_constraintBottom_toBottomOf="@id/back_arrow_button"
+               android:text="@string/full_walk_button_text"
+               android:textSize="18sp"
+               android:textColor="@color/black"
+               android:textStyle="bold"
+               />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:layout_constraintLeft_toRightOf="@id/back_arrow_button"
+               app:layout_constraintRight_toLeftOf="@id/share"
+               android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+               android:layout_marginTop="4dp"
+               android:layout_marginBottom="@dimen/activity_vertical_margin"
+               app:layout_constraintTop_toBottomOf="@id/title"
+               app:layout_constraintBottom_toBottomOf="parent"
+               android:text="@{eventHandler.time}"
+               android:textSize="18sp"
+               android:textColor="@color/black"
+               android:visibility="invisible"
+               />
+           
+       </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/courseHeaderContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        >
+        <ImageButton
+            android:id="@+id/close_button"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/ic_button_close"
+            android:background="@drawable/ic_oval"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
+            android:onClick="@{() -> eventHandler.onBackButtonClicked()}"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/action_share"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/close_button"
+            android:src="@drawable/ic_share"
+            android:background="@drawable/ic_oval"
+            android:layout_marginHorizontal="11dp"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
+            android:onClick="@{() -> eventHandler.onShareButtonClicked()}"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/course_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:layout_constraintTop_toTopOf="@id/close_button"
+            app:layout_constraintBottom_toBottomOf="@id/close_button"
+            android:text="@{eventHandler.title}"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            app:layout_constraintTop_toBottomOf="@id/course_header_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{eventHandler.time}"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@id/cont_button"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/cont_button"
+        style="@style/Onestep.ButtonPrimaryPink"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:onClick="@{() -> eventHandler.onContinueClicked()}"
+        android:text="@string/continue_text"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/feedback_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/feedback_button"
+        style="@style/Onestep.ButtonPrimaryPink"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:background="@drawable/redo_button_bg"
+        android:gravity="center"
+        android:text="@string/give_feedback"
+        android:textColor="@color/pink_pressed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="@{() -> eventHandler.onExplainThisToMeClicked()}"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+</layout>

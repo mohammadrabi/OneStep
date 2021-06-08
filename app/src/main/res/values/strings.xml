@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">OneStep</string>
+    <string name="settings_title">Settings</string>
+    <string name="view_details_button_text">View Details</string>
+    <string name="impaired">Impaired</string>
+    <string name="suboptimal">Suboptimal</string>
+    <string name="optimal">Optimal</string>
+    <string name="full_walk_button_text">Full walk Analysis</string>
+    <string name="continue_text">Continue</string>
+    <string name="done_text">Done</string>
+    <string name="give_feedback">Give Feedback</string>
+    <string name="share_title">Share title</string>
+    <string name="share_desc">Share description</string>
+    <string name="cm_text">cm</string>
+    <string name="kmh_text">km/h</string>
+    <string name="date_format">MMMM dd | hh:mm a</string>
+    <string name="measure_unites_text">MEASURE UNITS</string>
+    <string name="imperial_text">Imperial</string>
+    <string name="metric_text">Metric</string>
+    <string name="measure_unites_desc">Whereas most countries use the metric system which includes measuring units of meters and grams, in the United States, the imperial system is used where things are measured in feet, inches, and pounds.</string>
+
+
+
 </resources>

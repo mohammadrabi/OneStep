@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    <variable
+        name="eventHandler"
+        type="com.itg.onestep.summary.SummaryMetaDataEventHandler" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/courses_white">
+    <LinearLayout
+        android:id="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:gravity="center">
+    <LinearLayout
+        android:id="@+id/time_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/mid_guideline">
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{eventHandler.time}"
+            android:textAppearance="@style/TextBlack.Bold"
+            android:textSize="30dp"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="0:30" />
+
+        <TextView
+            android:id="@+id/time_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{eventHandler.timeUnit}"
+            android:textAppearance="@style/TextBlack.Bold"
+            android:textSize="14sp"
+            app:layout_constraintRight_toLeftOf="@id/mid_guideline"
+            tools:text=" min" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vertical_divider"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="#cecaca"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mid_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <LinearLayout
+        android:id="@+id/amount_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/mid_guideline"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{eventHandler.rate}"
+            android:textAppearance="@style/TextBlack.Bold"
+            android:textSize="30dp"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/amount_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{eventHandler.rateUnit}"
+            android:textAppearance="@style/TextBlack.Bold"
+            android:textSize="14sp"
+            tools:text=" steps" />
+    </LinearLayout>
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintTop_toBottomOf="@id/top_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="0dp"
+            android:layout_height="14dp"
+            android:maxWidth="35dp"
+            android:background="@drawable/my_recording_line"
+            android:backgroundTint="@color/warm_pink"
+            android:layout_marginHorizontal="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/impaired"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <TextView
+            android:id="@+id/impaired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/impaired"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/dot1"
+            app:layout_constraintEnd_toStartOf="@id/dot2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="0dp"
+            android:layout_height="14dp"
+            android:maxWidth="35dp"
+            app:layout_constraintStart_toEndOf="@id/impaired"
+            app:layout_constraintEnd_toStartOf="@id/suboptimal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/my_recording_line"
+            android:backgroundTint="@color/yellow"
+            android:layout_marginHorizontal="8dp"
+            />
+        <TextView
+            android:id="@+id/suboptimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/suboptimal"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/dot2"
+            app:layout_constraintEnd_toStartOf="@id/dot3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="0dp"
+            android:layout_height="14dp"
+            android:maxWidth="35dp"
+            app:layout_constraintStart_toEndOf="@id/suboptimal"
+            app:layout_constraintEnd_toStartOf="@id/optimal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/my_recording_line"
+            android:backgroundTint="@color/green"
+            android:layout_marginHorizontal="8dp"
+            />
+        <TextView
+            android:id="@+id/optimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/optimal"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/dot3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
