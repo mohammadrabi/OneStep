@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/warm_pink_pressed" />
+            <solid android:color="@color/pink_pressed" />
             <corners android:radius="@dimen/tutorial_buttons_radius" />
             <corners
                 android:bottomLeftRadius="30dp"
@@ -24,7 +24,7 @@
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/warm_pink" />
+            <solid android:color="@color/pink" />
 
             <corners
                 android:bottomLeftRadius="30dp"

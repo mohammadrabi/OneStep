@@ -18,7 +18,6 @@ class SplashActivity : AppCompatActivity() {
     }
     private fun loadSplashScreen(){
         Handler(Looper.getMainLooper()).postDelayed({
-            // You can declare your desire activity here to open after finishing splash screen. Like MainActivity
             val intent = Intent(this,SummaryActivity::class.java)
             startActivity(intent)
             finish()

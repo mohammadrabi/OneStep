@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="status_bar">#D2D2D2</color>
+    <color name="separator_color">#E6E6E6</color>
+
+    <color name="background_color">#F5F5F5</color>
+
+    <color name="colorPrimary">#69abfe</color>
+    <color name="colorPrimaryDark">#2e70fd</color>
+    <color name="colorAccent">#4c4e94</color>
+    <color name="darkGray">#656565</color>
+
+    <color name="pink">#f16574</color>
+    <color name="yellow">#f7b500</color>
+    <color name="green">#4bb8a2</color>
+
+    <color name="pink_pressed">#f68d98</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="text_black">#343434</color>
+
+    <color name="onestep_white">#f9f9f9</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,28 +27,5 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <color name="status_bar">#D2D2D2</color>
-    <color name="separator_color">#E6E6E6</color>
-
-    <color name="twilight">#4c4e94</color>
-    <color name="bgr">#F5F5F5</color>
-
-    <color name="oneStepPurple">@color/twilight</color>
-    <color name="colorPrimary">#69abfe</color>
-    <color name="colorPrimaryDark">#2e70fd</color>
-    <color name="colorAccent">@color/oneStepPurple</color>
-    <color name="darkGray">#656565</color>
-
-    <!-- Rainbow colors -->
-    <color name="warm_pink">#f16574</color>
-    <color name="yellow">#f7b500</color>
-    <color name="green">#4bb8a2</color>
-
-    <color name="warm_pink_pressed">#f68d98</color>
-    <color name="white_pressed">#f1f1f1</color>
-    <color name="text_black">#343434</color>
-
-    <color name="courses_white">#f9f9f9</color>
 
 </resources>

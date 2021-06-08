@@ -17,7 +17,6 @@ open class PreferenceManager constructor(context: Context) : IPreferenceHelper {
     companion object {
         const val MEASURE_UNITS = "measure_unit"
     }
-
     enum class MeasureUnit {
         Imperial, Metric;
         companion object {

@@ -2,14 +2,13 @@ package com.itg.onestep.summary
 
 import android.app.Activity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.itg.onestep.modules.Summary
-import com.itg.onestep.databinding.ActivityWalkSummaryBinding
-import com.itg.onestep.listener.SummaryCardButtonsClickListener
+import com.itg.onestep.modules.SummaryObject
+import com.itg.onestep.databinding.ActivitySummaryBinding
 
 class SummaryViewModel(
-        private val summary: Summary,
+        private val summary: SummaryObject,
         val activity: Activity,
-        var activityBinding: ActivityWalkSummaryBinding?,
+        var activityBinding: ActivitySummaryBinding?,
         val listener: SummaryCardButtonsClickListener,
 ) {
     var adapter: SummaryAdapter

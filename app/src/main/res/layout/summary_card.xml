@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="eventHandler"
-            type="com.itg.onestep.handlers.SummaryCardViewEventHandler" />
+            type="com.itg.onestep.summary.SummaryCardViewEventHandler" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="12dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:src="@drawable/info"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

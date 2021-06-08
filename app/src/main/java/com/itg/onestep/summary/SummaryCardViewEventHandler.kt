@@ -1,21 +1,20 @@
-package com.itg.onestep.handlers
+package com.itg.onestep.summary
 import android.content.Context
 import android.view.Gravity.TOP
 import android.view.View
 import com.bumptech.glide.Glide
 import com.itg.onestep.R
-import com.itg.onestep.modules.cards
+import com.itg.onestep.modules.CardObject
 import com.itg.onestep.databinding.SummaryCardBinding
 import com.itg.onestep.utils.MeasureConverter.Companion.cmToInches
 import com.itg.onestep.utils.MeasureConverter.Companion.kmToMph
-import com.itg.onestep.listener.SummaryCardButtonsClickListener
 import com.itg.onestep.utils.IPreferenceHelper
 import com.itg.onestep.utils.PreferenceManager
 import kotlin.math.roundToInt
 
 class SummaryCardViewEventHandler(
         private val context: Context,
-        private val cardObject: cards,
+        private val cardObject: CardObject,
         binding: SummaryCardBinding?,
 
         private val summaryCardButtonsClickListener: SummaryCardButtonsClickListener?,
@@ -49,7 +48,7 @@ class SummaryCardViewEventHandler(
                 viewDetailsButtonClicked()
             }
 
-            if (cardObject.stat_id == WalkAnalysisItemsViewHandler.HIP_RANGE) {
+            if (cardObject.stat_id == HIP_RANGE) {
                 binding.resultUnitTextview.gravity = TOP
             }
 
@@ -91,10 +90,10 @@ class SummaryCardViewEventHandler(
     val rateText: String
         get() {
             return when {
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH ->
+                cardObject.stat_id == STRIDE_LENGTH ->
                     if (shouldConvertToInches) cardObject.subtitle_en ?: ""
                     else cardObject.subtitle ?: ""
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY ->
+                cardObject.stat_id == VELOCITY ->
                     if (shouldConvertToMiles) cardObject.subtitle_en ?: ""
                     else cardObject.subtitle ?: ""
                 else -> cardObject.subtitle ?: ""
@@ -104,8 +103,8 @@ class SummaryCardViewEventHandler(
     val endText: String
         get() {
             return when {
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH -> getConvertedValue(cardObject.rainbow?.end).toString()
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY -> getSpeedValue(cardObject.rainbow?.end).toString()
+                cardObject.stat_id == STRIDE_LENGTH -> getConvertedValue(cardObject.rainbow?.end).toString()
+                cardObject.stat_id == VELOCITY -> getSpeedValue(cardObject.rainbow?.end).toString()
                 cardObject.rainbow?.end?.toInt()?.compareTo(cardObject.rainbow.end) == 0 -> cardObject.rainbow.end.toInt().toString()
                 else -> cardObject.rainbow?.end?.roundToDecimals(1).toString()
             }
@@ -114,8 +113,8 @@ class SummaryCardViewEventHandler(
     val startText: String
         get() {
             return when {
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH -> getConvertedValue(cardObject.rainbow?.start).toString()
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY -> getSpeedValue(cardObject.rainbow?.start).toString()
+                cardObject.stat_id == STRIDE_LENGTH -> getConvertedValue(cardObject.rainbow?.start).toString()
+                cardObject.stat_id == VELOCITY -> getSpeedValue(cardObject.rainbow?.start).toString()
                 cardObject.rainbow?.start?.toInt()?.compareTo(cardObject.rainbow.start) == 0 -> cardObject.rainbow.start.toInt().toString()
                 else -> cardObject.rainbow?.start?.roundToDecimals(1).toString()
             }
@@ -124,14 +123,14 @@ class SummaryCardViewEventHandler(
     val value: String
         get() {
             return when {
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH -> {
+                cardObject.stat_id == STRIDE_LENGTH -> {
                     if (getConvertedValue(cardObject.value) is Float) {
                         (getConvertedValue(cardObject.value) as Float).toInt().toString()
                     } else {
                         getConvertedValue(cardObject.value).toString()
                     }
                 }
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY -> getSpeedValue(cardObject.value).toString()
+                cardObject.stat_id == VELOCITY -> getSpeedValue(cardObject.value).toString()
                 cardObject.value?.toInt()?.compareTo(cardObject.value) == 0 -> cardObject.value.toInt().toString()
                 else -> cardObject.value?.roundToDecimals(1).toString()
             }
@@ -139,9 +138,9 @@ class SummaryCardViewEventHandler(
 
     val unitString: String
         get() {
-            return if (cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH)
+            return if (cardObject.stat_id == STRIDE_LENGTH)
                 return getUnits()
-            else if (cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY)
+            else if (cardObject.stat_id == VELOCITY)
                 return getSpeedUnit()
             else
                 cardObject.units ?: ""
@@ -180,5 +179,11 @@ class SummaryCardViewEventHandler(
         repeat(decimals) { dotAt *= 10 }
         val roundedValue = (this * dotAt).roundToInt()
         return (roundedValue / dotAt) + (roundedValue % dotAt).toFloat() / dotAt
+    }
+
+    companion object {
+        const val STRIDE_LENGTH = "STRIDE_LENGTH"
+        const val VELOCITY = "VELOCITY"
+        const val HIP_RANGE = "HIP_RANGE"
     }
 }

@@ -1,8 +1,10 @@
 package com.itg.onestep.summary
 
+import android.content.Context
+import com.itg.onestep.R
 import com.itg.onestep.modules.MetadataObject
 
-class SummaryMetaDataEventHandler(val metadata: MetadataObject?) {
+class SummaryMetaDataEventHandler(private val context: Context, val metadata: MetadataObject?) {
 
     val time: String by lazy {
         val seconds = metadata?.seconds
@@ -19,7 +21,7 @@ class SummaryMetaDataEventHandler(val metadata: MetadataObject?) {
     val timeUnit: String by lazy {
         val seconds = metadata?.seconds
         if (seconds != null) {
-            if (seconds / 60 >= 1) "min" else "sec"
+            if (seconds / 60 >= 1) context.getString(R.string.min_text) else context.getString(R.string.sec_text)
         } else {
             ""
         }
@@ -29,5 +31,5 @@ class SummaryMetaDataEventHandler(val metadata: MetadataObject?) {
         get() = (metadata?.steps ?: 0).toString()
 
     val rateUnit: String
-        get() = " Steps"
+        get() = context.getString(R.string.steps_text)
 }

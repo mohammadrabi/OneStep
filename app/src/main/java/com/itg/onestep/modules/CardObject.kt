@@ -4,12 +4,12 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class cards(
+data class CardObject(
         val description: String?,
-        val rainbow: rainbow?,
-        val stat_id: String?, // SYMMETRY_DIF",
+        val rainbow: RainbowObject?,
+        val stat_id: String?,
         val title: String?,
-        val type: String?, // simple",
+        val type: String?,
         val units: String?,
         val value: Float?,
         val subtitle: String?,
