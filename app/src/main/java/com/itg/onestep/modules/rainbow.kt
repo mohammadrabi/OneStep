@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RainbowObject(
+data class rainbow(
     val asset_id: String?, // ":"rainbow_balance",
     val asset_url: String?,
     val bubble_color: String?, // ":"green",

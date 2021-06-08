@@ -2,16 +2,17 @@ package com.itg.onestep.summary
 
 import android.content.Intent
 import com.itg.onestep.R
-import com.itg.onestep.modules.SummaryObject
+import com.itg.onestep.modules.Summary
 import com.itg.onestep.databinding.ActivityWalkSummaryBinding
+import com.itg.onestep.settings.SettingActivity
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class SummaryEventHandler(
-    val uuid: String,
-    var summary: SummaryObject,
-    val activity: SummaryActivity,
-    val activityBinding: ActivityWalkSummaryBinding?,
+        val uuid: String,
+        var summary: Summary,
+        val activity: SummaryActivity,
+        val activityBinding: ActivityWalkSummaryBinding?,
 ) {
 
     val title: String
@@ -37,7 +38,8 @@ class SummaryEventHandler(
 //    }
 
     fun onBackButtonClicked() {
-        activity.onBackPressed()
+        val intent = Intent(activity, SettingActivity::class.java)
+        activity.startActivity(intent)
     }
 
 

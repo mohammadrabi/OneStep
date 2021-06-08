@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="status_bar">#D2D2D2</color>
+    <color name="separator_color">#E6E6E6</color>
 
     <color name="twilight">#4c4e94</color>
     <color name="bgr">#F5F5F5</color>

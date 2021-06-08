@@ -2,8 +2,6 @@ package com.itg.onestep.settings
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import com.itg.onestep.R
 import com.itg.onestep.databinding.ActivitySettingBinding
 import com.itg.onestep.utils.IPreferenceHelper
@@ -38,19 +36,9 @@ class SettingActivity : AppCompatActivity() {
             }
             finish()
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.settings_menu_bar, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.left_button -> {
-                finish()
-            }
+        binding.backArrowButton.setOnClickListener {
+            finish()
         }
-        return super.onOptionsItemSelected(item)
     }
 }

@@ -4,6 +4,4 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class GaitParameters(
-    val result: List<GaitParametersObject>?
-) : Parcelable
+data class Event(var t: Float?, var latitude: Double, var longitude: Double) : Parcelable

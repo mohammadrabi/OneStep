@@ -1,8 +1,8 @@
 package com.itg.onestep.summary
 
-import com.itg.onestep.modules.WalkMetadataObject
+import com.itg.onestep.modules.MetadataObject
 
-class SummaryMetaDataEventHandler(val metadata: WalkMetadataObject?) {
+class SummaryMetaDataEventHandler(val metadata: MetadataObject?) {
 
     val time: String by lazy {
         val seconds = metadata?.seconds

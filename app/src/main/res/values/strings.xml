@@ -5,7 +5,7 @@
     <string name="impaired">Impaired</string>
     <string name="suboptimal">Suboptimal</string>
     <string name="optimal">Optimal</string>
-    <string name="full_walk_button_text">Full walk Analysis</string>
+    <string name="full_walk_button_text">Walk Summary</string>
     <string name="continue_text">Continue</string>
     <string name="done_text">Done</string>
     <string name="give_feedback">Give Feedback</string>
@@ -13,6 +13,11 @@
     <string name="share_desc">Share description</string>
     <string name="cm_text">cm</string>
     <string name="kmh_text">km/h</string>
+    <string name="inch_text"> in</string>
+    <string name="mile_text"> mi/h</string>
+    <string name="min_text">min</string>
+    <string name="sec_text">sec</string>
+    <string name="steps_text"> Steps</string>
     <string name="date_format">MMMM dd | hh:mm a</string>
     <string name="measure_unites_text">MEASURE UNITS</string>
     <string name="imperial_text">Imperial</string>

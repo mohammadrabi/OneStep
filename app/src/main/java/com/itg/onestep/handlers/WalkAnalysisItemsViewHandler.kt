@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import com.itg.onestep.R
-import com.itg.onestep.modules.CardObject
+import com.itg.onestep.modules.cards
 import com.itg.onestep.utils.IPreferenceHelper
 import com.itg.onestep.utils.MeasureConverter
 import com.itg.onestep.utils.PreferenceManager
@@ -12,7 +12,7 @@ import kotlin.math.roundToInt
 
 class WalkAnalysisItemsViewHandler(
     private val context: Context,
-    val cardObject: CardObject?
+    val cardObject: cards?
 ) {
     private var shouldConvertToInches: Boolean
     private var shouldConvertToMiles: Boolean
@@ -27,8 +27,8 @@ class WalkAnalysisItemsViewHandler(
                 usingMetricSystem = true
             }
         }
-        shouldConvertToInches = "cm" == cardObject?.units && !usingMetricSystem
-        shouldConvertToMiles = "km/h" == cardObject?.units && !usingMetricSystem
+        shouldConvertToInches = context.getString(R.string.cm_text) == cardObject?.units && !usingMetricSystem
+        shouldConvertToMiles = context.getString(R.string.kmh_text) == cardObject?.units && !usingMetricSystem
     }
 
     val iconColor: ColorStateList?
@@ -100,11 +100,11 @@ class WalkAnalysisItemsViewHandler(
     }
 
     private fun getUnits(): String {
-        return if (shouldConvertToInches) " in" else cardObject?.units ?: "cm"
+        return if (shouldConvertToInches) context.getString(R.string.inch_text) else cardObject?.units ?: context.getString(R.string.cm_text)
     }
 
     private fun getSpeedUnit(): String {
-        return if (shouldConvertToMiles) " mi/h" else cardObject?.units ?: "km/h"
+        return if (shouldConvertToMiles) context.getString(R.string.mile_text) else cardObject?.units ?: context.getString(R.string.kmh_text)
     }
 
     companion object {

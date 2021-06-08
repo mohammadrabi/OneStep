@@ -4,8 +4,8 @@ import android.view.Gravity.TOP
 import android.view.View
 import com.bumptech.glide.Glide
 import com.itg.onestep.R
-import com.itg.onestep.modules.CardObject
-import com.itg.onestep.databinding.CalibrationSummaryCardBinding
+import com.itg.onestep.modules.cards
+import com.itg.onestep.databinding.SummaryCardBinding
 import com.itg.onestep.utils.MeasureConverter.Companion.cmToInches
 import com.itg.onestep.utils.MeasureConverter.Companion.kmToMph
 import com.itg.onestep.listener.SummaryCardButtonsClickListener
@@ -15,8 +15,8 @@ import kotlin.math.roundToInt
 
 class SummaryCardViewEventHandler(
         private val context: Context,
-        private val cardObject: CardObject,
-        binding: CalibrationSummaryCardBinding?,
+        private val cardObject: cards,
+        binding: SummaryCardBinding?,
 
         private val summaryCardButtonsClickListener: SummaryCardButtonsClickListener?,
         private val seconds: Int?
@@ -60,7 +60,7 @@ class SummaryCardViewEventHandler(
             } else {
                 binding.rightNullContainer.visibility = View.GONE
             }
-            cardObject.RainbowObject?.bubble_color?.let {
+            cardObject.rainbow?.bubble_color?.let {
                 when (it) {
                     "green" -> binding.bubbleContainer.setBackgroundResource(R.drawable.green_speech_bubble)
                     "orange" -> binding.bubbleContainer.setBackgroundResource(R.drawable.yellow_speech_bubble)
@@ -69,7 +69,7 @@ class SummaryCardViewEventHandler(
                 }
             }
 
-            cardObject.RainbowObject?.asset_url?.let {
+            cardObject.rainbow?.asset_url?.let {
                 Glide.with(binding.rangeBar.context)
                     .load(it)
                     .dontAnimate()
@@ -83,7 +83,7 @@ class SummaryCardViewEventHandler(
         summaryCardButtonsClickListener?.onViewDetailsClicked(cardObject.title, cardObject.gait_parameter, "", seconds = seconds ?: 0)
     }
     val percent: Double
-        get() = (cardObject.RainbowObject?.percent ?: 0.0) * 100
+        get() = (cardObject.rainbow?.percent ?: 0.0) * 100
 
     val title: String
         get() = cardObject.title ?: ""
@@ -104,20 +104,20 @@ class SummaryCardViewEventHandler(
     val endText: String
         get() {
             return when {
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH -> getConvertedValue(cardObject.RainbowObject?.end).toString()
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY -> getSpeedValue(cardObject.RainbowObject?.end).toString()
-                cardObject.RainbowObject?.end?.toInt()?.compareTo(cardObject.RainbowObject.end) == 0 -> cardObject.RainbowObject.end.toInt().toString()
-                else -> cardObject.RainbowObject?.end?.roundToDecimals(1).toString()
+                cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH -> getConvertedValue(cardObject.rainbow?.end).toString()
+                cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY -> getSpeedValue(cardObject.rainbow?.end).toString()
+                cardObject.rainbow?.end?.toInt()?.compareTo(cardObject.rainbow.end) == 0 -> cardObject.rainbow.end.toInt().toString()
+                else -> cardObject.rainbow?.end?.roundToDecimals(1).toString()
             }
         }
 
     val startText: String
         get() {
             return when {
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH -> getConvertedValue(cardObject.RainbowObject?.start).toString()
-                cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY -> getSpeedValue(cardObject.RainbowObject?.start).toString()
-                cardObject.RainbowObject?.start?.toInt()?.compareTo(cardObject.RainbowObject.start) == 0 -> cardObject.RainbowObject.start.toInt().toString()
-                else -> cardObject.RainbowObject?.start?.roundToDecimals(1).toString()
+                cardObject.stat_id == WalkAnalysisItemsViewHandler.STRIDE_LENGTH -> getConvertedValue(cardObject.rainbow?.start).toString()
+                cardObject.stat_id == WalkAnalysisItemsViewHandler.VELOCITY -> getSpeedValue(cardObject.rainbow?.start).toString()
+                cardObject.rainbow?.start?.toInt()?.compareTo(cardObject.rainbow.start) == 0 -> cardObject.rainbow.start.toInt().toString()
+                else -> cardObject.rainbow?.start?.roundToDecimals(1).toString()
             }
         }
 
@@ -148,11 +148,11 @@ class SummaryCardViewEventHandler(
         }
 
     private fun getUnits(): String {
-        return if (shouldConvertToInches) " in" else cardObject.units ?: "cm"
+        return if (shouldConvertToInches) context.getString(R.string.inch_text) else cardObject.units ?: context.getString(R.string.cm_text)
     }
 
     private fun getSpeedUnit(): String {
-        return if (shouldConvertToMiles) " mi/h" else cardObject.units ?: "km/h"
+        return if (shouldConvertToMiles) context.getString(R.string.mile_text) else cardObject.units ?: context.getString(R.string.kmh_text)
     }
 
     private fun getConvertedValue(value: Float?): Any {

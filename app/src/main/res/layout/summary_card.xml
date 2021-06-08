@@ -28,7 +28,7 @@
             android:id="@+id/topView"
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="150dp">
+            android:layout_height="130dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/info_view"
                 android:layout_width="48dp"
@@ -155,6 +155,7 @@
                     android:orientation="horizontal"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
+                    android:layout_marginBottom="5dp"
                     tools:background="@drawable/red_speech_bubble">
 
                     <TextView
@@ -195,9 +196,12 @@
 
                     <ImageView
                         android:id="@+id/range_bar"
-                        android:layout_width="134dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="138dp"
+                        android:layout_height="12dp"
                         android:scaleType="fitXY"
+                        app:layout_constraintStart_toStartOf="@+id/right_range"
+                        app:layout_constraintEnd_toEndOf="@id/left_range"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:src="@drawable/symmetry_rainbow" />
 
                     <TextView

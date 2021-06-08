@@ -2,12 +2,12 @@ package com.itg.onestep.summary
 
 import android.app.Activity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.itg.onestep.modules.SummaryObject
+import com.itg.onestep.modules.Summary
 import com.itg.onestep.databinding.ActivityWalkSummaryBinding
 import com.itg.onestep.listener.SummaryCardButtonsClickListener
 
 class SummaryViewModel(
-        private val summaryObject: SummaryObject,
+        private val summary: Summary,
         val activity: Activity,
         var activityBinding: ActivityWalkSummaryBinding?,
         val listener: SummaryCardButtonsClickListener,
@@ -16,14 +16,14 @@ class SummaryViewModel(
 
     init {
         val items = arrayListOf<Any>()
-        summaryObject.metadata?.let {
+        summary.metadata?.let {
             items.add(it)
         }
-        summaryObject.cardObject?.let {
+        summary.cards?.let {
             items.addAll(it.toCollection(ArrayList()))
         }
 
-        adapter = SummaryAdapter(activity, items.toTypedArray(), listener, summaryObject.metadata?.seconds)
+        adapter = SummaryAdapter(activity, items.toTypedArray(), listener, summary.metadata?.seconds)
         val linearLayoutManager = LinearLayoutManager(activity)
         activityBinding?.recyclerView?.itemAnimator = null
         activityBinding?.recyclerView?.layoutManager = linearLayoutManager

@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.RecyclerView
-import com.itg.onestep.modules.CardObject
-import com.itg.onestep.modules.WalkMetadataObject
-import com.itg.onestep.databinding.CalibrationSummaryCardBinding
+import com.itg.onestep.databinding.SummaryCardBinding
 import com.itg.onestep.databinding.MetadataLayoutBinding
 import com.itg.onestep.handlers.SummaryCardViewEventHandler
 import com.itg.onestep.listener.SummaryCardButtonsClickListener
+import com.itg.onestep.modules.MetadataObject
+import com.itg.onestep.modules.cards
 
 class SummaryAdapter(
         private var context: Context,
@@ -22,7 +22,7 @@ class SummaryAdapter(
         val holder: RecyclerView.ViewHolder
         val inflater = LayoutInflater.from(parent.context)
         holder = when (viewType) {
-            CALIBRATION_CARD -> CalibrationSummaryViewHolder(CalibrationSummaryCardBinding.inflate(inflater, parent, false))
+            CALIBRATION_CARD -> CalibrationSummaryViewHolder(SummaryCardBinding.inflate(inflater, parent, false))
             METADATA_ITEM -> SummaryMetaDataViewHolder(MetadataLayoutBinding.inflate(inflater, parent, false))
             else -> {
                 //CelloLog.i(SummaryActivity.TAG, "Summary Adapter no holder for viewType: $viewType")
@@ -34,8 +34,8 @@ class SummaryAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
-            is CardObject -> CALIBRATION_CARD
-            is WalkMetadataObject -> METADATA_ITEM
+            is cards -> CALIBRATION_CARD
+            is MetadataObject -> METADATA_ITEM
             else -> {
 //                CelloLog.i(SummaryActivity.TAG, "unsupported card type")
                 throw IllegalArgumentException()
@@ -47,21 +47,22 @@ class SummaryAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (items[position]) {
+            is cards -> {
+                return (holder as CalibrationSummaryViewHolder).bind(items[position] as cards)
+            }
 
-            is WalkMetadataObject -> {
-                return (holder as SummaryMetaDataViewHolder).bind(items[position] as WalkMetadataObject)
+            is MetadataObject -> {
+                return (holder as SummaryMetaDataViewHolder).bind(items[position] as MetadataObject)
             }
-            is CardObject -> {
-                return (holder as CalibrationSummaryViewHolder).bind(items[position] as CardObject)
-            }
+
             else -> {
-                return (holder as CalibrationSummaryViewHolder).bind(items[position] as CardObject)
+                return (holder as CalibrationSummaryViewHolder).bind(items[position] as cards)
             }
         }
     }
 
-    inner class CalibrationSummaryViewHolder(private val binding: CalibrationSummaryCardBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CardObject) {
+    inner class CalibrationSummaryViewHolder(private val binding: SummaryCardBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: cards) {
             val eventHandler = SummaryCardViewEventHandler(context, item, binding, listener, seconds ?: 0)
             binding.eventHandler = eventHandler
             setCardBubblePos(binding)
@@ -77,7 +78,7 @@ class SummaryAdapter(
             binding.executePendingBindings()
         }
 
-        fun setCardBubblePos(card: CalibrationSummaryCardBinding) {
+        fun setCardBubblePos(card: SummaryCardBinding) {
             val min = card.rangeContainer.x
             val max = card.rangeContainer.x + card.rangeContainer.width
             card.eventHandler?.let {
@@ -99,7 +100,7 @@ class SummaryAdapter(
     }
 
     inner class SummaryMetaDataViewHolder(private val binding: MetadataLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: WalkMetadataObject) {
+        fun bind(item: MetadataObject) {
             val eventHandler = SummaryMetaDataEventHandler(item)
             binding.eventHandler = eventHandler
             binding.executePendingBindings()
@@ -107,8 +108,10 @@ class SummaryAdapter(
     }
 
     companion object {
-        const val METADATA_ITEM = 1
-        const val CALIBRATION_CARD = 2
-        const val GAP_OFFSET = 3
+        const val CALIBRATION_CARD = 1
+        const val INSIGHT_CARD = 2
+        const val MAP_CARD = 3
+        const val METADATA_ITEM = 4
+        const val GAP_OFFSET = 5
     }
 }
