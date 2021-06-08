@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="eventHandler"
-            type="com.itg.onestep.handlers.CalibrationSummaryCardViewEventHandler" />
+            type="com.itg.onestep.handlers.SummaryCardViewEventHandler" />
     </data>
 
     <androidx.cardview.widget.CardView

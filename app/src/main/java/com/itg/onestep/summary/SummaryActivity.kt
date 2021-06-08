@@ -8,14 +8,14 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.itg.onestep.R
 import com.itg.onestep.databinding.ActivityWalkSummaryBinding
-import com.itg.onestep.listener.CalibrationButtonsClickListener
+import com.itg.onestep.listener.SummaryCardButtonsClickListener
 import com.itg.onestep.modules.SummaryObject
 import com.itg.onestep.settings.SettingActivity
 
 
 class SummaryActivity :
     AppCompatActivity(),
-    CalibrationButtonsClickListener{
+    SummaryCardButtonsClickListener{
 
     lateinit var summaryBinding: ActivityWalkSummaryBinding
     lateinit var summaryEventHandler: SummaryEventHandler

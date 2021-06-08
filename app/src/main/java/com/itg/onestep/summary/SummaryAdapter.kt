@@ -9,15 +9,14 @@ import com.itg.onestep.modules.CardObject
 import com.itg.onestep.modules.WalkMetadataObject
 import com.itg.onestep.databinding.CalibrationSummaryCardBinding
 import com.itg.onestep.databinding.MetadataLayoutBinding
-import com.itg.onestep.handlers.CalibrationSummaryCardViewEventHandler
-import com.itg.onestep.listener.CalibrationButtonsClickListener
-import com.itg.onestep.summary.SummaryMetaDataEventHandler
+import com.itg.onestep.handlers.SummaryCardViewEventHandler
+import com.itg.onestep.listener.SummaryCardButtonsClickListener
 
 class SummaryAdapter(
-    private var context: Context,
-    private var items: Array<Any>,
-    private val listener: CalibrationButtonsClickListener,
-    private val seconds: Int?
+        private var context: Context,
+        private var items: Array<Any>,
+        private val listener: SummaryCardButtonsClickListener,
+        private val seconds: Int?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val holder: RecyclerView.ViewHolder
@@ -63,7 +62,7 @@ class SummaryAdapter(
 
     inner class CalibrationSummaryViewHolder(private val binding: CalibrationSummaryCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CardObject) {
-            val eventHandler = CalibrationSummaryCardViewEventHandler(context, item, binding, listener, seconds ?: 0)
+            val eventHandler = SummaryCardViewEventHandler(context, item, binding, listener, seconds ?: 0)
             binding.eventHandler = eventHandler
             setCardBubblePos(binding)
 

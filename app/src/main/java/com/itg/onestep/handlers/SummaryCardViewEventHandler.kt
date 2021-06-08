@@ -8,18 +8,18 @@ import com.itg.onestep.modules.CardObject
 import com.itg.onestep.databinding.CalibrationSummaryCardBinding
 import com.itg.onestep.utils.MeasureConverter.Companion.cmToInches
 import com.itg.onestep.utils.MeasureConverter.Companion.kmToMph
-import com.itg.onestep.listener.CalibrationButtonsClickListener
+import com.itg.onestep.listener.SummaryCardButtonsClickListener
 import com.itg.onestep.utils.IPreferenceHelper
 import com.itg.onestep.utils.PreferenceManager
 import kotlin.math.roundToInt
 
-class CalibrationSummaryCardViewEventHandler(
-    private val context: Context,
-    private val cardObject: CardObject,
-    binding: CalibrationSummaryCardBinding?,
+class SummaryCardViewEventHandler(
+        private val context: Context,
+        private val cardObject: CardObject,
+        binding: CalibrationSummaryCardBinding?,
 
-    private val calibrationButtonsClickListener: CalibrationButtonsClickListener?,
-    private val seconds: Int?
+        private val summaryCardButtonsClickListener: SummaryCardButtonsClickListener?,
+        private val seconds: Int?
 ) {
     private var shouldConvertToInches: Boolean
     private var shouldConvertToMiles: Boolean
@@ -43,7 +43,7 @@ class CalibrationSummaryCardViewEventHandler(
 
             binding.infoView.setOnClickListener {
                 val description = "Test test"
-                calibrationButtonsClickListener?.onMoreInfoClickedClicked(cardObject.title, description, cardObject.youtube_id)
+                summaryCardButtonsClickListener?.onMoreInfoClickedClicked(cardObject.title, description, cardObject.youtube_id)
             }
             binding.viewDetails.setOnClickListener {
                 viewDetailsButtonClicked()
@@ -80,7 +80,7 @@ class CalibrationSummaryCardViewEventHandler(
     }
 
     private fun viewDetailsButtonClicked() {
-        calibrationButtonsClickListener?.onViewDetailsClicked(cardObject.title, cardObject.gait_parameter, "", seconds = seconds ?: 0)
+        summaryCardButtonsClickListener?.onViewDetailsClicked(cardObject.title, cardObject.gait_parameter, "", seconds = seconds ?: 0)
     }
     val percent: Double
         get() = (cardObject.RainbowObject?.percent ?: 0.0) * 100

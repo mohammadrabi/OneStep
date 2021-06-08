@@ -4,13 +4,13 @@ import android.app.Activity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.itg.onestep.modules.SummaryObject
 import com.itg.onestep.databinding.ActivityWalkSummaryBinding
-import com.itg.onestep.listener.CalibrationButtonsClickListener
+import com.itg.onestep.listener.SummaryCardButtonsClickListener
 
 class SummaryViewModel(
-    private val summaryObject: SummaryObject,
-    val activity: Activity,
-    var activityBinding: ActivityWalkSummaryBinding?,
-    val listener: CalibrationButtonsClickListener,
+        private val summaryObject: SummaryObject,
+        val activity: Activity,
+        var activityBinding: ActivityWalkSummaryBinding?,
+        val listener: SummaryCardButtonsClickListener,
 ) {
     var adapter: SummaryAdapter
 
