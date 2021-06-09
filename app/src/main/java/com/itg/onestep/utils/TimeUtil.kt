@@ -23,8 +23,10 @@ fun timeWithPadFormat( seconds: Int?): String {
 fun timeUnit(context: Context,seconds: Int?): String {
     var timeUnit = ""
     if (seconds != null) {
-        if (seconds / 60 >= 1)
-            timeUnit = " " + context.getString(R.string.min_text) else " " + context.getString(R.string.sec_text)
+        if (seconds / 60 >= 1) timeUnit = " " + context.getString(R.string.min_text)
+        else timeUnit = " " + context.getString(R.string.sec_text)
+    } else {
+        " "
     }
     return timeUnit
 }
