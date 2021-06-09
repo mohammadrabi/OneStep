@@ -6,10 +6,10 @@ import com.itg.onestep.modules.SummaryObject
 import com.itg.onestep.databinding.ActivitySummaryBinding
 
 class SummaryViewModel(
-        private val summary: SummaryObject,
-        val activity: Activity,
-        var activityBinding: ActivitySummaryBinding?,
-        val listener: SummaryCardButtonsClickListener,
+    summary: SummaryObject,
+    activity: Activity,
+    activityBinding: ActivitySummaryBinding?,
+    listener: SummaryCardButtonsClickListener,
 ) {
     var adapter: SummaryAdapter
 
@@ -22,7 +22,7 @@ class SummaryViewModel(
             items.addAll(it.toCollection(ArrayList()))
         }
 
-        adapter = SummaryAdapter(activity, items.toTypedArray(), listener, summary.metadata?.seconds)
+        adapter = SummaryAdapter(activity, items.toTypedArray(), listener)
         val linearLayoutManager = LinearLayoutManager(activity)
         activityBinding?.recyclerView?.itemAnimator = null
         activityBinding?.recyclerView?.layoutManager = linearLayoutManager

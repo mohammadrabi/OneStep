@@ -9,23 +9,20 @@ import com.itg.onestep.utils.MeasureConverter.Companion.cmToInches
 import com.itg.onestep.utils.MeasureConverter.Companion.kmToMph
 import com.itg.onestep.utils.IPreferenceHelper
 import com.itg.onestep.utils.PreferenceManager
+import com.itg.onestep.utils.roundToDecimals
 import com.squareup.picasso.Picasso
-import kotlin.math.roundToInt
 
 class SummaryCardViewEventHandler(
         private val context: Context,
         private val cardObject: CardObject,
         binding: SummaryCardBinding?,
-
         private val summaryCardButtonsClickListener: SummaryCardButtonsClickListener?,
-        private val seconds: Int?
 ) {
     private var shouldConvertToInches: Boolean
     private var shouldConvertToMiles: Boolean
     private val preferenceHelper: IPreferenceHelper by lazy { PreferenceManager(context) }
 
     init {
-        // set percentage
         var usingMetricSystem = true
         when (preferenceHelper.getMeasureUnit()) {
             PreferenceManager.MeasureUnit.Imperial.ordinal -> {
@@ -41,7 +38,7 @@ class SummaryCardViewEventHandler(
         binding?.let {
 
             binding.infoView.setOnClickListener {
-                summaryCardButtonsClickListener?.onMoreInfoClickedClicked(cardObject.title,cardObject.info)
+                summaryCardButtonsClickListener?.onInfoClickedClicked(cardObject.title,cardObject.info)
             }
 
             if (cardObject.stat_id == HIP_RANGE) {
@@ -73,6 +70,12 @@ class SummaryCardViewEventHandler(
                         .into(binding.rangeBar);
             }
         }
+    }
+
+    companion object {
+        const val STRIDE_LENGTH = "STRIDE_LENGTH"
+        const val VELOCITY = "VELOCITY"
+        const val HIP_RANGE = "HIP_RANGE"
     }
 
     val percent: Double
@@ -132,12 +135,11 @@ class SummaryCardViewEventHandler(
 
     val unitString: String
         get() {
-            return if (cardObject.stat_id == STRIDE_LENGTH)
-                return getUnits()
-            else if (cardObject.stat_id == VELOCITY)
-                return getSpeedUnit()
-            else
-                cardObject.units ?: ""
+            return when (cardObject.stat_id) {
+                STRIDE_LENGTH -> return getUnits()
+                VELOCITY -> return getSpeedUnit()
+                else -> cardObject.units ?: ""
+            }
         }
 
     private fun getUnits(): String {
@@ -166,18 +168,5 @@ class SummaryCardViewEventHandler(
         } else {
             0
         }
-    }
-
-    fun Float.roundToDecimals(decimals: Int): Float {
-        var dotAt = 1
-        repeat(decimals) { dotAt *= 10 }
-        val roundedValue = (this * dotAt).roundToInt()
-        return (roundedValue / dotAt) + (roundedValue % dotAt).toFloat() / dotAt
-    }
-
-    companion object {
-        const val STRIDE_LENGTH = "STRIDE_LENGTH"
-        const val VELOCITY = "VELOCITY"
-        const val HIP_RANGE = "HIP_RANGE"
     }
 }

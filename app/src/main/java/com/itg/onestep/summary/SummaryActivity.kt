@@ -20,38 +20,23 @@ class SummaryActivity :
     lateinit var summaryEventHandler: SummaryEventHandler
     lateinit var summaryViewModel: SummaryViewModel
     lateinit var summaryObject: SummaryObject
-    lateinit var uuid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initialize()
+    }
 
+    private fun initialize() {
         try {
             val jsonFileString = getJsonDataFromAsset(applicationContext, "onestep_response.json")
             if (jsonFileString != null) {
                 Log.i("data", jsonFileString)
+                summaryObject = Gson().fromJson(jsonFileString, SummaryDetailsObject::class.java).summary
             }
-            summaryObject = Gson().fromJson(jsonFileString, SummaryDetailsObject::class.java).summary
-            Log.i("data", " " +  summaryObject)
-
-            uuid = summaryObject.metadata?.uuid ?: ""
         } catch (err: JSONException) {
         }
-        try {
-
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        var parameterList: ArrayList<String> = ArrayList()
-        var extractedParamsCount = 0
         summaryBinding = ActivitySummaryBinding.inflate(layoutInflater)
         summaryObject.let { it ->
-            it.cards?.forEach { card ->
-                parameterList.add(card.title ?: "")
-                if (card.value != null) {
-                    extractedParamsCount += 1
-                }
-            }
-
             summaryViewModel = SummaryViewModel(
                 it,
                 this,
@@ -59,23 +44,15 @@ class SummaryActivity :
             )
 
             summaryEventHandler = SummaryEventHandler(
-                uuid,
                 it,
                 this,
-                summaryBinding,
             )
             summaryBinding.eventHandler = summaryEventHandler
         }
-
-
         setContentView(summaryBinding.getRoot())
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-    override fun onMoreInfoClickedClicked(title: String?, description: String?) {
+    override fun onInfoClickedClicked(title: String?, description: String?) {
         AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(description)

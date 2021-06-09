@@ -3,19 +3,19 @@ package com.itg.onestep.summary
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import com.itg.onestep.R
 import com.itg.onestep.modules.SummaryObject
 import com.itg.onestep.databinding.ActivitySummaryBinding
 import com.itg.onestep.settings.SettingActivity
+import com.itg.onestep.utils.timeStampToDate
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 class SummaryEventHandler(
-        val uuid: String,
-        var summary: SummaryObject,
-        val activity: SummaryActivity,
-        val activityBinding: ActivitySummaryBinding?,
+    var summary: SummaryObject,
+    private val activity: SummaryActivity,
 ) {
 
     val title: String
@@ -25,9 +25,7 @@ class SummaryEventHandler(
 
     val time: String
         get() {
-            val simpleDateFormat = SimpleDateFormat(activity.getString(R.string.date_format), Locale.ENGLISH)
-            return simpleDateFormat.format((summary.metadata?.timestamp ?: 0))
-
+            return timeStampToDate(activity, summary.metadata?.timestamp)
         }
 
     fun onSettingsButtonClicked() {
@@ -51,7 +49,6 @@ class SummaryEventHandler(
                 .setMessage(message)
                 .setCancelable(true)
                 .setPositiveButton(activity.getString(R.string.yes_text)) { _, _ ->
-                    // should finish the activity
 
                 }
                 .setNegativeButton(activity.getString(R.string.cancel_text), null)
@@ -74,5 +71,4 @@ class SummaryEventHandler(
     fun onFeedBackButtonClicked() {
         showAlert("OneStep","FeedBack button is pressed!")
     }
-
 }

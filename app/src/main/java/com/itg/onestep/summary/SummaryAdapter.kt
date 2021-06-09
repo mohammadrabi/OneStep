@@ -14,14 +14,13 @@ class SummaryAdapter(
         private var context: Context,
         private var items: Array<Any>,
         private val listener: SummaryCardButtonsClickListener,
-        private val seconds: Int?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val holder: RecyclerView.ViewHolder
         val inflater = LayoutInflater.from(parent.context)
         holder = when (viewType) {
             SUMMARY_CARD -> SummaryViewHolder(SummaryCardBinding.inflate(inflater, parent, false))
-            METADATA_ITEM -> SummaryMetaDataViewHolder(MetadataLayoutBinding.inflate(inflater, parent, false))
+            METADATA -> SummaryMetaDataViewHolder(MetadataLayoutBinding.inflate(inflater, parent, false))
             else -> {
                 throw IllegalArgumentException()
             }
@@ -31,8 +30,8 @@ class SummaryAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
+            is MetadataObject -> METADATA
             is CardObject -> SUMMARY_CARD
-            is MetadataObject -> METADATA_ITEM
             else -> {
                 throw IllegalArgumentException()
             }
@@ -42,24 +41,22 @@ class SummaryAdapter(
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (items[position]) {
+        return when (items[position]) {
             is CardObject -> {
-                return (holder as SummaryViewHolder).bind(items[position] as CardObject)
+                (holder as SummaryViewHolder).bind(items[position] as CardObject)
             }
-
             is MetadataObject -> {
-                return (holder as SummaryMetaDataViewHolder).bind(items[position] as MetadataObject)
+                (holder as SummaryMetaDataViewHolder).bind(items[position] as MetadataObject)
             }
-
             else -> {
-                return (holder as SummaryViewHolder).bind(items[position] as CardObject)
+                (holder as SummaryViewHolder).bind(items[position] as CardObject)
             }
         }
     }
 
     inner class SummaryViewHolder(private val binding: SummaryCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CardObject) {
-            val eventHandler = SummaryCardViewEventHandler(context, item, binding, listener, seconds ?: 0)
+            val eventHandler = SummaryCardViewEventHandler(context, item, binding, listener)
             binding.eventHandler = eventHandler
             setCardBubblePos(binding)
 
@@ -80,6 +77,12 @@ class SummaryAdapter(
             card.eventHandler?.let {
                 val pos = (it.percent * (max - min) / 100) + min
                 var posVal = pos.toFloat() - (card.bubbleContainer.width / 2)
+                if (it.percent <= 0) {
+                    posVal += 20
+                }
+                if (it.percent >= 100) {
+                    posVal -= 20
+                }
                 card.bubbleContainer.x = posVal
             }
         }
@@ -94,7 +97,7 @@ class SummaryAdapter(
     }
 
     companion object {
-        const val METADATA_ITEM = 1
+        const val METADATA = 1
         const val SUMMARY_CARD = 2
     }
 }

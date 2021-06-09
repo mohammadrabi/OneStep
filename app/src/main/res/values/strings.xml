@@ -13,19 +13,16 @@
     <string name="share_desc">Share description</string>
     <string name="cm_text">cm</string>
     <string name="kmh_text">km/h</string>
-    <string name="inch_text"> in</string>
-    <string name="mile_text"> mi/h</string>
+    <string name="inch_text">in</string>
+    <string name="mile_text">mi/h</string>
     <string name="min_text">min</string>
     <string name="sec_text">sec</string>
-    <string name="steps_text"> Steps</string>
-    <string name="date_format">MMMM dd | hh:mm a</string>
+    <string name="steps_text">Steps</string>
+    <string name="date_format">MMMM dd, yyyy | hh:mm a</string>
     <string name="measure_unites_text">MEASURE UNITS</string>
     <string name="imperial_text">Imperial</string>
     <string name="metric_text">Metric</string>
     <string name="measure_unites_desc">Whereas most countries use the metric system which includes measuring units of meters and grams, in the United States, the imperial system is used where things are measured in feet, inches, and pounds.</string>
-
-    <string name="yes_text">Yes</string>
+    <string name="yes_text">Ok</string>
     <string name="cancel_text">Cancel</string>
-
-
 </resources>

@@ -3,33 +3,26 @@ package com.itg.onestep.summary
 import android.content.Context
 import com.itg.onestep.R
 import com.itg.onestep.modules.MetadataObject
+import com.itg.onestep.utils.timeUnit
+import com.itg.onestep.utils.timeWithPadFormat
 
-class SummaryMetaDataEventHandler(private val context: Context, val metadata: MetadataObject?) {
+class SummaryMetaDataEventHandler(private val context: Context, private val metadata: MetadataObject?) {
 
     val time: String by lazy {
         val seconds = metadata?.seconds
-        if (seconds != null) {
-            val timeResult =
-                "${(seconds / 60).toString().padStart(2, '0')}:" +
-                    "${(seconds % 60).toString().padStart(2, '0')}" // it's not redundant - ignore the compiler
-            timeResult
-        } else {
-            "--"
-        }
+        val timeResult = timeWithPadFormat(seconds)
+        timeResult
     }
 
     val timeUnit: String by lazy {
         val seconds = metadata?.seconds
-        if (seconds != null) {
-            if (seconds / 60 >= 1) context.getString(R.string.min_text) else context.getString(R.string.sec_text)
-        } else {
-            ""
-        }
+        val timeUnit = timeUnit(context,seconds)
+        timeUnit
     }
 
     val rate: String
         get() = (metadata?.steps ?: 0).toString()
 
     val rateUnit: String
-        get() = context.getString(R.string.steps_text)
+        get() = " " + context.getString(R.string.steps_text)
 }
