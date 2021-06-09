@@ -1,9 +1,11 @@
 package com.itg.onestep.summary
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.itg.onestep.R
 import com.itg.onestep.databinding.ActivitySummaryBinding
 import com.itg.onestep.modules.SummaryObject
 import com.itg.onestep.modules.SummaryDetailsObject
@@ -65,6 +67,7 @@ class SummaryActivity :
             summaryBinding.eventHandler = summaryEventHandler
         }
 
+
         setContentView(summaryBinding.getRoot())
     }
 
@@ -72,16 +75,16 @@ class SummaryActivity :
         super.onBackPressed()
     }
 
-    override fun onMoreInfoClickedClicked(title: String?, description: String?, videoId: String?) {
-
-    }
-
-    override fun onViewDetailsClicked(
-        title: String?,
-        gaitParameter: String?,
-        uuid: String?,
-        seconds: Int
-    ) {
-
+    override fun onMoreInfoClickedClicked(title: String?, description: String?) {
+        AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(description)
+                .setCancelable(true)
+                .setPositiveButton(this.getString(R.string.yes_text)) { _, _ ->
+                    // should finish the activity
+                }
+                .setNegativeButton(this.getString(R.string.cancel_text), null)
+                .setIcon(R.mipmap.ic_launcher)
+                .show()
     }
 }

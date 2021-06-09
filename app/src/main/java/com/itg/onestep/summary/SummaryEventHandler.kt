@@ -1,6 +1,9 @@
 package com.itg.onestep.summary
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContracts
 import com.itg.onestep.R
 import com.itg.onestep.modules.SummaryObject
 import com.itg.onestep.databinding.ActivitySummaryBinding
@@ -29,7 +32,31 @@ class SummaryEventHandler(
 
     fun onSettingsButtonClicked() {
         val intent = Intent(activity, SettingActivity::class.java)
-        activity.startActivity(intent)
+        resultLauncher.launch(intent)
+    }
+
+    var resultLauncher = activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            reloadData()
+        }
+    }
+
+    private fun reloadData() {
+         activity.summaryViewModel.adapter.notifyDataSetChanged()
+    }
+
+    private fun showAlert(title: String?,message: String?) {
+        AlertDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(true)
+                .setPositiveButton(activity.getString(R.string.yes_text)) { _, _ ->
+                    // should finish the activity
+
+                }
+                .setNegativeButton(activity.getString(R.string.cancel_text), null)
+                .setIcon(R.mipmap.ic_launcher)
+                .show()
     }
 
     fun onShareButtonClicked() {
@@ -41,10 +68,11 @@ class SummaryEventHandler(
     }
 
     fun onContinueClicked() {
-
+        showAlert("OneStep","Continue button is pressed!")
     }
 
     fun onFeedBackButtonClicked() {
-
+        showAlert("OneStep","FeedBack button is pressed!")
     }
+
 }

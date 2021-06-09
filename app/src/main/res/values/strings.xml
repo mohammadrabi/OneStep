@@ -24,6 +24,8 @@
     <string name="metric_text">Metric</string>
     <string name="measure_unites_desc">Whereas most countries use the metric system which includes measuring units of meters and grams, in the United States, the imperial system is used where things are measured in feet, inches, and pounds.</string>
 
+    <string name="yes_text">Yes</string>
+    <string name="cancel_text">Cancel</string>
 
 
 </resources>

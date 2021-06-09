@@ -153,8 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@id/cont_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -167,47 +166,52 @@
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:overScrollMode="never"
                     android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@id/cont_button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/cont_button"
+                    style="@style/Onestep.ButtonPrimaryPink"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:onClick="@{() -> eventHandler.onContinueClicked()}"
+                    android:text="@string/continue_text"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@id/feedback_button"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <TextView
+                    android:id="@+id/feedback_button"
+                    style="@style/Onestep.ButtonPrimaryPink"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/redo_button_bg"
+                    android:gravity="center"
+                    android:text="@string/give_feedback"
+                    android:textColor="@color/button_pressed"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:onClick="@{() -> eventHandler.onFeedBackButtonClicked()}"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/cont_button"
-        style="@style/Onestep.ButtonPrimaryPink"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:onClick="@{() -> eventHandler.onContinueClicked()}"
-        android:text="@string/continue_text"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/feedback_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 
-    <TextView
-        android:id="@+id/feedback_button"
-        style="@style/Onestep.ButtonPrimaryPink"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:background="@drawable/redo_button_bg"
-        android:gravity="center"
-        android:text="@string/give_feedback"
-        android:textColor="@color/button_pressed"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:onClick="@{() -> eventHandler.onFeedBackButtonClicked()}"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 <!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 </layout>

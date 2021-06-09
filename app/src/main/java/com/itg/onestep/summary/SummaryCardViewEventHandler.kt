@@ -2,7 +2,6 @@ package com.itg.onestep.summary
 import android.content.Context
 import android.view.Gravity.TOP
 import android.view.View
-import com.bumptech.glide.Glide
 import com.itg.onestep.R
 import com.itg.onestep.modules.CardObject
 import com.itg.onestep.databinding.SummaryCardBinding
@@ -10,6 +9,7 @@ import com.itg.onestep.utils.MeasureConverter.Companion.cmToInches
 import com.itg.onestep.utils.MeasureConverter.Companion.kmToMph
 import com.itg.onestep.utils.IPreferenceHelper
 import com.itg.onestep.utils.PreferenceManager
+import com.squareup.picasso.Picasso
 import kotlin.math.roundToInt
 
 class SummaryCardViewEventHandler(
@@ -41,11 +41,7 @@ class SummaryCardViewEventHandler(
         binding?.let {
 
             binding.infoView.setOnClickListener {
-                val description = "Test test"
-                summaryCardButtonsClickListener?.onMoreInfoClickedClicked(cardObject.title, description, cardObject.youtube_id)
-            }
-            binding.viewDetails.setOnClickListener {
-                viewDetailsButtonClicked()
+                summaryCardButtonsClickListener?.onMoreInfoClickedClicked(cardObject.title,cardObject.info)
             }
 
             if (cardObject.stat_id == HIP_RANGE) {
@@ -69,18 +65,16 @@ class SummaryCardViewEventHandler(
             }
 
             cardObject.rainbow?.asset_url?.let {
-                Glide.with(binding.rangeBar.context)
-                    .load(it)
-                    .dontAnimate()
-                    .error(Glide.with(binding.rangeBar).load(R.drawable.rainbow_stride_length))
-                    .into(binding.rangeBar)
+                Picasso.get().setLoggingEnabled(true)
+                Picasso.get()
+                        .load(it)
+                        .placeholder(R.drawable.rainbow_stride_length)
+                        .error(R.drawable.rainbow_stride_length)
+                        .into(binding.rangeBar);
             }
         }
     }
 
-    private fun viewDetailsButtonClicked() {
-        summaryCardButtonsClickListener?.onViewDetailsClicked(cardObject.title, cardObject.gait_parameter, "", seconds = seconds ?: 0)
-    }
     val percent: Double
         get() = (cardObject.rainbow?.percent ?: 0.0) * 100
 

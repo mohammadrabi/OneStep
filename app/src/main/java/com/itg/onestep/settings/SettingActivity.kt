@@ -1,5 +1,6 @@
 package com.itg.onestep.settings
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.itg.onestep.R
@@ -34,6 +35,7 @@ class SettingActivity : AppCompatActivity() {
                     preferenceHelper.setMeasureUnit(PreferenceManager.MeasureUnit.Metric.ordinal)
                 }
             }
+            setResult(Activity.RESULT_OK,intent);
             finish()
         }
 
